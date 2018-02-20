@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/vendor/autoload.php';
+
 use Phpmig\Adapter;
 use Pimple\Container;
 use Illuminate\Database\Capsule\Manager as Capsule;
