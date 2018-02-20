@@ -26,9 +26,24 @@ INSTALACION:
 
 2) Instalar con composer install
 
-3) Desde la raiz del proyecto, ejecutar "vendor/bin/phpmig.bat init", esto va a crear lo siguiente en la raiz:
+3) Copiar la carpeta vendor\davedevelopment\phpmig\bin a la raiz del proyecto
+
+4) Ejecutar (desde la raiz del proyecto) "bin/phpmig init", esto va a crear lo siguiente en la raiz:
 /migrations     <=  (carpeta vacia, donde se van a crear los archivos de migracion)
 phpmig.php      <=  archivo donde configuramos como interactua el componente de migracion con la DB (en este caso, Eloquent)
 
+5) Ahora, hay que crear la tabla en la DB. Para eso, una vez q tengamos actualizado el codigo del archivo phpmig.php para que
+    se ejecute con Eloquent, ejecutamos (de nuevo, desde la raiz) 'php bin/phpmig check' (desde vagrant)
 
+6) Listo, a partir de este punto podemos crear archivos de migraciones y ejecutar las mismas con los comandos habituales.
+    Ahora hay que trabajar la parte de autenticacion. (correr los comandos desde vagrant)
+
+
+
+
+======================
+Articulos de ayuda:
+https://arda.pw/using-eloquent-and-schema-builder-commands-outside-laravel-ab7588803aa2
+https://www.cloudways.com/blog/create-rest-api-silex/
+https://github.com/davedevelopment/phpmig
 
