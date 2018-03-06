@@ -52,4 +52,48 @@ https://matthiasnoback.nl/2012/07/symfony2-security-creating-dynamic-roles-using
 https://matthiasnoback.nl/2012/07/symfony-security-component-silex-adding-a-security-voter-for-domain-names/
 
 ======================
+======================
+Phinx
+------
+Esta herramienta permite hacer migraciones y seeding, y es "framework-agnostic", por lo que se puede usar con cualquier
+framework (symfony, laravel, slim), y por lo que entiendo tambien con cualquier ORM
+
+Articulos en los que hago pie:
+https://siipo.la/blog/how-to-use-eloquent-orm-migrations-outside-laravel
+http://docs.phinx.org/en/latest/migrations.html
+
+    MIGRATIONS
+1) Instalar phinx:
+    $ composer require robmorgan/phinx --dev
+TIP: Una vez hecho esto, puedo ver los comandos que ofrece phinx con:
+    $ ./vendor/bin/phinx
+2) Para que se cree el archivo .yml con la configuracion por defecto, ejecutar ./vendor/bin/phinx init  DESDE VAGRANT!!
+3) Editar la configuracion con los parametros pertinentes:
+    - Setear los paths de seeds y migrations (define un par por defecto)
+    - Definir la migration_base_class, donde se define el init() y dentro de este, el Capsule de Eloquent
+    - Las credenciales para los 3 distintos entornos posibles (podemos repetir los mismos, obviamente)
+4) Crear archivos de migracion siguiendo la doc oficial
+
+    SEEDING
+Si bien pude armar algo con phinx, me gusta mas la forma de hacer seeding con lumen/laravel, y ante lo engorroso y dificil
+que era "portar" este comportamiento sin replicar gran parte del framework, opte por tener los dos microframeworks instalados
+en el mismo proyecto (aunque lumen solo en el entorno dev)
+======================
+LUMEN
+    Por lo que explicaba en el punto SEEDING de Phinx, opte por instalar lumen como require-dev (para que no se suban ambos
+proyectos cuando haya un eventual deploy).
+Los archivos requeridos para hacer seeding y las eventuales modificaciones necesarias son las sgtes:
+- composer require laravel/lumen-framework ^5.6   <= desde consola
+- composer require vlucas/phpdotenv ^2.4          <= desde consola. este tengo la duda de si no se instalo automaticamente
+- artisan
+    se modifico la ubicacion del bootstrap
+- bootstrap/artisanLauncher.php
+    configura la instancia de lumen, para usar facades y eloquent
+- app/Console/
+    Carpeta necesaria para ejecutar comandos con artisan
+- app/Exceptions/
+    Otra carpeta necesaria para usar lumen
+- database/
+    Contiene factories/ y seeds/, carpetas donde guardamos el ModelFactory y los seeders respectivamente. Si voy a hacer
+    migrations con lumen, hay q agregar la carpeta respectiva (mirar en proyecto hecho con lumen)
 

@@ -1,16 +1,26 @@
 {
     "require": {
-        "silex/silex": "~2.0",
+        "silex/silex": "dev-master",
         "symfony/security": "^3.4",
-        "illuminate/database": "5.5.*",
-        "davedevelopment/phpmig": "^1.4"
+        "illuminate/database": "5.6.*",
+        "illuminate/config": "^5.6"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/"
         }
     },
+    "autoload-dev": {
+        "classmap": [
+            "database/"
+        ]
+    },
     "require-dev": {
-        "symfony/var-dumper": "^4.0"
+        "symfony/var-dumper": "^4.0",
+        "robmorgan/phinx": "^0.9.2",
+        "fzaninotto/faker": "^1.7",
+        "illuminate/container": "^5.6",
+        "laravel/lumen-framework": "^5.6",
+        "vlucas/phpdotenv": "^2.4"
     }
 }

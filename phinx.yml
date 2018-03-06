@@ -1,0 +1,40 @@
+paths:
+#    migrations: '%%PHINX_CONFIG_DIR%%/db/migrations'
+    migrations: '%%PHINX_CONFIG_DIR%%/phinxMigrations'
+#    seeds: '%%PHINX_CONFIG_DIR%%/db/seeds'
+    seeds: '%%PHINX_CONFIG_DIR%%/phinxMigrations/seeds'
+
+migration_base_class:
+  'App\Migration\PhinxMigrationDriver'
+
+environments:
+    default_migration_table: phinxlog
+#    default_database: silex
+    production:
+        adapter: mysql
+        host: localhost
+        name: silex
+        user: homestead
+        pass: secret
+        port: 3306
+        charset: utf8
+
+    development:
+        adapter: mysql
+        host: localhost
+        name: silex
+        user: homestead
+        pass: secret
+        port: 3306
+        charset: utf8
+
+    testing:
+        adapter: mysql
+        host: localhost
+        name: silex
+        user: homestead
+        pass: secret
+        port: 3306
+        charset: utf8
+
+version_order: creation
