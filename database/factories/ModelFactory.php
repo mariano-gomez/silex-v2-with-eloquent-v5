@@ -11,11 +11,11 @@
 |
 */
 
-$factory->define(App\Models\PhinxUser::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
-        'password'          => sha1($faker->password),
+        'password'          => 'Marianote',
+        'facebook_id'          => null,
         'username'          => $faker->userName,
-        'plain_password'    => sha1('foo'),
         'roles'             => 'ROLE_USER',
     ];
 });

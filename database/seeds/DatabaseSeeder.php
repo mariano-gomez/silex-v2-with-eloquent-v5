@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\PhinxUser;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +14,22 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $estudiantes_ids_array = range(1, 500);
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0'); # Para poder truncar las tablas
-        PhinxUser::truncate();
-        DB::table('users_phinx')->truncate();
+        $app = new Silex\Application();
+        $app['debug'] = true;
+        require __DIR__ . '/../../bootstrap/config.php';
+        $app->boot();
 
-        factory(PhinxUser::class, 50)->create();
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0'); # So i can truncate the tables
+        User::truncate();
+        DB::table('users')->truncate();
+
+        factory(User::class, 5)
+            ->create()
+            ->each(function (User $user) use ($app) {
+                $oldPassword = $user->password;
+                $user->password = $app['security.default_encoder']->encodePassword($oldPassword, '');
+                $user->save();
+            })
+        ;
     }
 }
